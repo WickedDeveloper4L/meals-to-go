@@ -4,7 +4,8 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
   card: {
     backgroundColor: theme.colors.bg.primary,
-    marginBottom: theme.space[3],
+    marginBottom: theme.space[2],
+    margin: theme.space[2],
   },
   image: {
     padding: theme.space[3],

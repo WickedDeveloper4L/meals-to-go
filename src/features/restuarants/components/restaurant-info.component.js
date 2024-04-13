@@ -4,22 +4,25 @@ import { styles } from "./restaurant-info.styles";
 import { SvgXml } from "react-native-svg";
 import star from "../../../../assets/star";
 import open from "../../../../assets/open";
-export const RestaurantInfoCard = ({ restaurant = {} }) => {
+import Favourite from "./favourite.component";
+export const RestaurantInfoCard = ({ restaurant }) => {
   const {
-    name = "some restaurant",
-    address = "100 random place",
-    icon = "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png",
+    name,
+    address,
+    icon,
     photos = [
       "https://img.freepik.com/premium-photo/restaurant-table-many-different-dishes_135427-6768.jpg?w=740",
     ],
     rating = 4,
-    isOpenNow = true,
-    isClosedTemporarily = true,
+    isOpenNow,
+    isClosedTemporarily,
+    placeId,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
   return (
     <Card style={styles.card} elevation={5}>
+      <Favourite restaurant={restaurant} />
       <Card.Cover
         style={styles.image}
         source={{
@@ -31,8 +34,13 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
           <Text style={styles.text}>{name}</Text>
           <View style={styles.svgCon}>
             <View style={styles.starCon}>
-              {ratingArray.map(() => (
-                <SvgXml xml={star} width={20} height={20} />
+              {ratingArray.map((_, i) => (
+                <SvgXml
+                  key={`star-${placeId}-${i}`}
+                  xml={star}
+                  width={20}
+                  height={20}
+                />
               ))}
             </View>
             <View style={styles.openCon}>
